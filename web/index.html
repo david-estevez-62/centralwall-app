@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="startupModule">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+
+<body ng-controller="initController as initCtrl">
+
+		<!-- header div element -->
+		<div id="header">
+			<a href="#!">
+				<span id="title">canvas</span>
+			</a>
+			<a href="#!" class="authLink" ng-show="usr">{{ usr.email }}</a>
+			<a href="#!" class="authLink" ng-show="!usr">Login/Signup</a>
+			<p ng-show="initCtrl.info">{{ initCtrl.info }}</p>
+		</div>
+
+		
+
+		<!-- nav block element -->
+		<div id="nav">
+			<span class="active" ng-show="!usr">wall</span>
+			<span class="active" ng-show="usr" ng-click="initCtrl.selectState($event, 'nonedit')">wall</span>
+			<span ng-show="usr" ng-click="initCtrl.selectState($event, 'edit')">edit wall</span>
+		</div>
+
+
+		<!-- login block element -->
+		<div id="loginBlock" class="hide">
+		    <div>
+          <span class="active" ng-click="initCtrl.switchLoginMode($event)">login</span>
+          <span ng-click="initCtrl.switchLoginMode($event)">signup</span>
+        </div>
+		    <form id="loginForm" method="POST" autocomplete="off">
+		      <input type="email" name="username" placeholder="email" required="required"/>
+		      <input type="password" name="password" placeholder="password" minlength="2" required="required"/>
+		      <input type="submit" value="submit"/>
+		    </form>
+		</div>
+		<div id="overlay" class="hide" ng-click="initCtrl.exitOverlay()"></div>
+
+
+		<!-- canvas element will add editable div layer in javascript -->
+		<div id="backSetting">
+        	<img ng-repeat="img in initCtrl.imgs" ng-src="{{img}}" ng-hide="initCtrl.bkgrdHidden">
+    	</div>
+
+
+		<!-- toolbar block element -->
+		<div id="toolbar" class="hide">
+		  	<div id="refreshBtn">
+		    	<input type="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-refresh-128.png"/>
+		  	</div>
+		  	<div>
+		    	<input type="color" id="colInp" name="color"/>
+		  	</div>
+        	<div>
+		    	<select>
+		      		<option value="draw">draw</option>
+		      		<option value="text">text</option>
+		    	</select>
+		  	</div>
+		  	<div>
+		    	<input id="backgroundTog" type="checkbox" ng-model="initCtrl.bkgrdHidden"/>
+		  	</div>
+		  	<div id="postBtn">
+		    	<input type="button" value="post"/>
+		  	</div>
+		</div>
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.5.2/dom-to-image.min.js"></script>
+<script type="text/javascript" src="apisettings.js"></script>
+<script type="text/javascript" src="client.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
+
+

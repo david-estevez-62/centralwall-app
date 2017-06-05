@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tests</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<ul id="output"></ul>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="testdataurl.js"></script>
+<script type="text/javascript" src="ajaxhelpers.js"></script>
+<script type="text/javascript" src="../../web/apisettings.js"></script>
+<script type="text/javascript">
+	var output = document.getElementById("output");
+
+	function assert(outcome, description){
+		var li = document.createElement("li");
+		li.className = outcome ? "pass" : "fail";
+		li.appendChild( document.createTextNode(description) );
+
+		output.appendChild(li);
+	}
+</script>
+<script type="text/javascript" src="test.js"></script>
+
+</body>
+</html>
