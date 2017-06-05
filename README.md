@@ -6,7 +6,7 @@
 ### About:   A Collaborative Message board
 
 
-### Installing the PreRequisites:
+### Installing the Prerequisites:
 - Be sure NodeJs vsn 6.0 or greater is installed. The email module (Nodemailer) won't work otherwise
 - Also Install Mongo
 - In order to get started using Mongo with your application (after it has been downloaded) follow the following steps:
