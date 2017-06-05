@@ -24,13 +24,13 @@
   2) cd centralwall-app (navigate to the newly cloned directory)
   3) cd api (navigate to the api directory where the backend application is located)
   4) In same terminal (1st terminal tab) run "npm install" (to install the needed packages for the project)
-  5) (In same terminal) run "node server.js" (start the backend server application)
+  5) (In same terminal) run "node server.js" (start and run the node server, backend application)
   6) 2nd terminal tab) start mongo (with "mongod" if you followed the instructions above otherwise "sudo mongod")
   7) 3rd terminal tab) navigate back a directory ("cd ..") and then into the "web" directory at the root level of the project ("cd web")
-  8) Once done (still in 3rd terminal tab) run "python -m SimpleHTTPServer 8888"
-  9) After starting up a local server for the frontend application in step 8, leave running, and navigate to http://localhost:8888 (in a browser)
+  8) Once done (still in 3rd terminal tab) run "python -m SimpleHTTPServer xxxx" (replace the xxxx with a port of your choosing)
+  9) After starting up a local server for the frontend application in step 8, leave running, and navigate to http://localhost:xxxx (in a browser, remember to use the same port number that was chosen in step 8)
   
- (Note: line breaks in the code snippet below means the code should be run in a new terminal tab. Also same as above. The       code snippet is the same as the "How to get started" section)
+ (Note: line breaks in the code snippet below mean the code should be run in a new terminal tab. Also same as above. The       code snippet is the same as the "How to get started" section. However Step 9 is not included in the code snippet below because it is not code to be run in the terminal so if following the code snippet below remember after finishing those steps to navigate to http://localhost:xxxx in a browser to see the frontend application being displayed )
 ```
 git clone https://github.com/ehruska/centralwall-app.git
 cd centralwall-app
@@ -42,7 +42,7 @@ sudo mongod
 
 cd ..
 cd web
-python -m SimpleHTTPServer 8888
+python -m SimpleHTTPServer xxxx
 ```
 
 ### How to run the tests
