@@ -24,11 +24,11 @@
   2) cd centralwall-app (navigate to the newly cloned directory)
   3) cd api (navigate to the api directory where the backend application is located)
   4) In same terminal (1st terminal tab) run "npm install" (to install the needed packages for the project)
-  5) (In same terminal) run "node server.js"
+  5) (In same terminal) run "node server.js" (start the backend server application)
   6) 2nd terminal tab) start mongo (with "mongod" if you followed the instructions above otherwise "sudo mongod")
   7) 3rd terminal tab) navigate back a directory ("cd ..") and then into the "web" directory at the root level of the project ("cd web")
   8) Once done (still in 3rd terminal tab) run "python -m SimpleHTTPServer 8888"
-  9) Navigate to http://localhost:8888 (in a browser)
+  9) After starting up a local server for the frontend application in step 8, leave running, and navigate to http://localhost:8888 (in a browser)
   
  (Note: line breaks in the code snippet below means the code should be run in a new terminal tab. Also same as above. The       code snippet is the same as the "How to get started" section)
 ```
@@ -38,11 +38,11 @@ cd api
 npm install
 node server.js
 
-sudo mongod (or mongod if you followed the instructions above)
+sudo mongod
 
 cd ..
 cd web
-python -m SimpleHTTPServer 8888 (then navigate to http://localhost:8888 (in a browser))
+python -m SimpleHTTPServer 8888
 ```
 
 ### How to run the tests
