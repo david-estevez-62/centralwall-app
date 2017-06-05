@@ -47,6 +47,6 @@ python -m SimpleHTTPServer xxxx
 
 ### How to run the tests
 To run the tests make sure the tabs running the node server ("node server.js") and the tab running mongo ("mongod")
-remain running. After having created a user or two in the client application and confirming the email verification of said user. Open the test.html file in the tests folder within the api directory in a browser and the tests should be run. Note Test d) which tests the route /adjoinimg will create a new img every time the tests are run, you can see the imgs being created if you have open the public/img/uploads directory as you reload the page. To test the DOM changes and event listeners open the dom-test.html file in the tests folder within the api directory in a browser and the dom tests should be run
+remain running. After having created a user or two in the client application and confirming the email verification of said user. Open the test.html file in the tests folder within the api directory in a browser and the tests should be run. Note Test d) which tests the route /adjoinimg will create a new img every time the tests are run, you can see the imgs being created if you have open the public/img/uploads directory as you reload the page. To test the DOM manipulations and event listeners open the dom-test.html file in the tests folder within the api directory in a browser and the dom tests should be run
 
 
