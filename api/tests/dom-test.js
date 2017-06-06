@@ -142,7 +142,7 @@
 		          $("#loginBlock #loginForm").trigger("submit");
 		      });
 		      
-		      it ("loginState is the element having the current active class it should be the same element as the first span in #loginBlock that by default start with the class", function() { 
+		      it ("loginState is the element having the current active class it should be the same element as the first span in #loginBlock that by default starts with the active class", function() { 
 		          expect(loginState).toBe($("#loginBlock span")[0]);
 		      });
 		    });
