@@ -15,8 +15,8 @@
 	               "<div id='draftLayer'></div>" +
 
 
-	               "<div id='loginBlock' class='hide'><span class='active' onclick='loginState()'>login</span>" + 
-	               "<span onclick='loginState()'>signup</span><form id='loginForm' onsubmit='postLoginForm(event)'></form></div>" +
+	               "<div id='loginBlock' class='hide'><span class='active' onclick='loginType()'>login</span>" + 
+	               "<span onclick='loginType()'>signup</span><form id='loginForm' onsubmit='postLoginForm(event)'></form></div>" +
 
 
 	               "<div id='overlay' onclick='exitLoginState()' class='hide'></div><a href='#!'class='authLink' onclick='enterLoginModal()'></a>" +
@@ -193,7 +193,7 @@
   
 
 
-    function something1(){
+    function loginType(){
 	    if(!($($("#loginBlock span")[1]).hasClass("active"))) {
 		      $("#loginBlock .active").removeClass("active");
 		      $($("#loginBlock span")[1]).addClass("active");
