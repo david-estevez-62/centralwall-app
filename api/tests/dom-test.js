@@ -6,25 +6,25 @@
 
 
 
-	// Set up fixtures to mimic dom
+	// Set up fixtures to replicate the frontend applications dom
 	function setUpHTMLFixture() {
 
-   setFixtures("<div id='toolbar'><input type='button' onclick='submitAdditions()'>" + 
-   						 "<div id='refreshBtn' onclick='startDraftFromScratch()'></div></div>" +
+	   setFixtures("<div id='toolbar'><input type='button' onclick='submitAdditions()'>" + 
+	   						 "<div id='refreshBtn' onclick='startDraftFromScratch()'></div></div>" +
 
-               "<div id='draftLayer'></div>" +
-
-
-               "<div id='loginBlock' class='hide'><span class='active' onclick='something1()'>login</span>" + 
-               "<span onclick='something1()'>signup</span><form id='loginForm' onsubmit='postLoginForm(event)'></form></div>" +
+	               "<div id='draftLayer'></div>" +
 
 
-               "<div id='overlay' onclick='exitLoginState()' class='hide'></div><a href='#!'class='authLink' onclick='enterLoginModal()'></a>" +
+	               "<div id='loginBlock' class='hide'><span class='active' onclick='loginState()'>login</span>" + 
+	               "<span onclick='loginState()'>signup</span><form id='loginForm' onsubmit='postLoginForm(event)'></form></div>" +
 
 
-               "<div id='nav'><span class='active'>wall</span></div>"
+	               "<div id='overlay' onclick='exitLoginState()' class='hide'></div><a href='#!'class='authLink' onclick='enterLoginModal()'></a>" +
 
-              )
+
+	               "<div id='nav'><span class='active'>wall</span></div>"
+
+	              )
 	}
 
 
@@ -32,22 +32,27 @@
 
 
 
-  describe("FRONTEND TESTS", function() { 
+  describe("DOM manipulation and frontend tests", function() { 
 
 
 		    describe("Toolbar input type btn click event", function() {
 		      beforeEach(function() {
-		        setUpHTMLFixture();
+			        setUpHTMLFixture();
+
 		          $("#draftLayer").append("<div>");
 		          $("#toolbar [type=button]").trigger("click");
 		      });
 		      
-		      it ("DraftLayer div should contain a div element and textField variable should exist", function() {
-		        // #draftLayer should contain the div we appended. We did this because
-		        // in the click handler the #draftLayer must contain atleast 1 child
-		        // element to get within the condition and run the domtoimg api 
-		        expect($("#draftLayer")).toContainElement("div");
-		        expect(wallAdditions).toBeTruthy();
+		      it ("DraftLayer div should contain a div element and wallAdditions variable should exist", function() {
+			        // The editable element (#draftLayer) has no children elements at the start but that is
+			        // no longer the case after we just appended one to it. We did this because the 
+			        // click handler first checks if the editable element (#draftLayer) contains any 
+			        // child elements before running its specific code associated with the case when 
+			        // child elements exist. We check to see if we get in the condition by changing 
+			        // a global variable indicating the code ran, in the actual application the domtoimg api 
+			        // would be run here
+			        expect($("#draftLayer")).toContainElement("div");
+			        expect(wallAdditions).toBeTruthy();
 		      });
 		    });
 
@@ -55,13 +60,15 @@
 
 		    describe("Login or signup form switch click event", function() {
 		      beforeEach(function() {
-		        setUpHTMLFixture();
-		          $($("#loginBlock span")[1]).trigger("click");
+			        setUpHTMLFixture();
+
+			        $($("#loginBlock span")[1]).trigger("click");
 		      });
 		      
-		      it ("The active class should be removed from the login span and added to the signin span", function() {
-		        // This tests tests the switch of the active class to the default login 
-		        // span as the active element to the signin span
+		      it ("The active class should be switched from the default login span and added to the signin span", function() {
+		          // The active class should be removed from the first span, in the node with
+		          // #loginBlock, which is the one that starts by default having the active 
+		          // class. And added to its sibling span which is the second span in #loginBlock
 		          expect(($("#loginBlock span")[0]).className).toBe("");
 		          expect(($("#loginBlock span")[1]).className).toBe("active");
 		      });
@@ -71,14 +78,15 @@
 
 		    describe("Link for login modal click event", function() {
 		      beforeEach(function() {
-		        setUpHTMLFixture();
-		          $(".authLink").trigger("click");
+			        setUpHTMLFixture();
+
+			        $(".authLink").trigger("click");
 		      });
 		      
 		      it ("Elements loginBlock and overlay should have their class of hide removed", function() {
-		          // These two elements would  have the hide class to start out by
+		          // These two elements would have the hide class to start out by
 		          // default however after clicking the link with class authLink we 
-		          // should see that the class on both elements has been removed
+		          // should see that the class on both elements have been removed
 		          expect(($("#loginBlock")[0]).className).toBe("");
 		          expect(($("#overlay")[0]).className).toBe("");
 		      });
@@ -87,20 +95,21 @@
 
 		    describe("Exit Login form modal view", function() {
 		      beforeEach(function() {
-		        setUpHTMLFixture();
-		        // Remove the class of hide from the loginBlock and the overlay div, the
-		        // exitLoginState function should add them right back
-		        $("#loginBlock").removeClass("hide");
-		      	$("#overlay").removeClass("hide");
+			        setUpHTMLFixture();
+			        // Remove the class of hide from the loginBlock and the overlay div, to
+			        // see if the exitLoginState function adds them right back
+			        $("#loginBlock").removeClass("hide");
+			      	$("#overlay").removeClass("hide");
 
-		        $("#overlay").trigger("click");
+			        $("#overlay").trigger("click");
 		      });
 		      
 		      it ("Overlay div click event should add the hide class back to the loginBlock and itself", function() {
-		          // The exitLoginState function should add the hide class back to the 
-		          // loginBlock and overlay, this effectively removes the login modal view
-		          expect(($("#loginBlock")[0]).className).toBe("hide");
-		          expect(($("#overlay")[0]).className).toBe("hide");
+			        // Check to see if the hide class exists on the loginBlock and overlay as we
+			        // expect, this function in the application is responsible for effectively 
+			        // removing the login modal view
+			        expect(($("#loginBlock")[0]).className).toBe("hide");
+			        expect(($("#overlay")[0]).className).toBe("hide");
 		      });
 		    });
 
@@ -109,14 +118,19 @@
 		    describe("Toolbar refresh btn click event", function() {
 		      beforeEach(function() {
 		        	setUpHTMLFixture();
-		        	// The toolbar refresh btn only takes affect when there is something to 
-		        	// refresh meaning additions made to the draftLayer so we append a child
-		        	// element to the draftLayer
-		          $("#toolbar #refreshBtn").trigger("click");
+
+		        	$("#draftLayer").append("<div>");
+			        $("#toolbar #refreshBtn").trigger("click");
 		      });
 		      
 		      it ("Toolbar refresh btn click event", function() {
-		          expect(($("#draftLayer")[0])).not.toBeUndefined();
+		      		// The draftLayer should exist, even though we removed it in the event handler
+		      		// we added it right back
+	          	expect(($("#draftLayer")[0])).toBeTruthy();
+	          	// The child element added in the precondition should not exist because we removed
+	          	// the original draftLayer it was attached to and created a different draftLayer 
+	          	// from scratch
+	          	expect(($("#draftLayer")[0]).firstChild).toBeNull();
 		      });
 		    });
 
@@ -128,7 +142,7 @@
 		          $("#loginBlock #loginForm").trigger("submit");
 		      });
 		      
-		      it ("weg reg...", function() {
+		      it ("loginState is the element having the current active class it should be the same element as the first span in #loginBlock that by default start with the class", function() { 
 		          expect(loginState).toBe($("#loginBlock span")[0]);
 		      });
 		    });
@@ -137,15 +151,15 @@
 
 		    describe("Reset to original guest (non-edit) state", function() {
 		      beforeEach(function() {
-		        setUpHTMLFixture();
+			        setUpHTMLFixture();
 
-		        $("#nav span").removeClass("active");
-		        // Remove the class of hide from the loginBlock and the overlay div, the
-		        // exitLoginState function should add them right back
-		        $("#loginBlock").removeClass("hide");
-		      	$("#overlay").removeClass("hide");
+			        $("#nav span").removeClass("active");
+			        // Remove the class of hide from the loginBlock and the overlay div, the
+			        // resetState function should add them right back
+			        $("#loginBlock").removeClass("hide");
+			      	$("#overlay").removeClass("hide");
 
-		        resetState()
+			        resetState()
 		      });
 		      
 		      it ("The resetState should remove the draftLayer div and hide the login modal if being displayed", function() {
@@ -155,7 +169,6 @@
 		          expect(($("#toolbar")[0]).className).toBe("hide");
 
 		          expect(($("#draftLayer")[0])).toBeUndefined();
-
 				  });
 		    });
 
@@ -171,9 +184,10 @@
 
     function submitAdditions(){
       if($("#draftLayer")[0].firstChild){
-        // set a global variable to a fixed value to know we got in here. In the actual 
-        // application the api that creates a dataUrl from a given element would run here
-        wallAdditions = true;
+	        // Set a global variable to a fixed value that we will use to indicate if we made
+	        // it in the condition. In the actual application the domtoimg api that creates 
+	        // a dataUrl from a given element would run here
+	        wallAdditions = true;
       }
     }
   
@@ -181,61 +195,58 @@
 
     function something1(){
 	    if(!($($("#loginBlock span")[1]).hasClass("active"))) {
-	      $("#loginBlock .active").removeClass("active");
-	      $($("#loginBlock span")[1]).addClass("active");
-
+		      $("#loginBlock .active").removeClass("active");
+		      $($("#loginBlock span")[1]).addClass("active");
 	    }
     }
 
 
 
     function enterLoginModal(){
-		  $("#loginBlock").removeClass("hide");
-		  $("#overlay").removeClass("hide");
+		    $("#loginBlock").removeClass("hide");
+		    $("#overlay").removeClass("hide");
     }
 
 
 
     function exitLoginState(){
-      $("#loginBlock").addClass("hide");
-      $("#overlay").addClass("hide");
+	      $("#loginBlock").addClass("hide");
+	      $("#overlay").addClass("hide");
 
-      $("#loginBlock .active").removeClass("active");
-      $("#loginBlock span:first-child").addClass("active");
+	      $("#loginBlock .active").removeClass("active");
+	      $("#loginBlock span:first-child").addClass("active");
     }
 
 
 
     function startDraftFromScratch() {
     	if($("#draftLayer")[0].firstChild){
-
-    		$("#draftLayer").remove();
-  			// Append back in overlay, it doesn't matter where we append the overlay div 
-  			// back to because we are just going to access the element by id and it isn't 
-  			// going to be displayed. Can't attached to body element because body does not 
-  			// exist
-  			$("#overlay").append("#draftLayer");
+	    		$("#draftLayer").remove();
+	  			// It doesn't matter where we append the editable element (#draftLayer) because we 
+	  			// just check if an element having the id draftLayer exists in the tests we run, and 
+	  			// it won't be displayed. The id draftLayer should exist when we got to do our test
+	  			// because even though we remove the element we add it right back after
+	  			$("#overlay").append("<div id='draftLayer'></div>");
     	}
     }
 
 
 
     function postLoginForm(e) {
-    	e.preventDefault();
+	    	e.preventDefault();
 
-    	loginState = $("#loginBlock").find(".active")[0];
+	    	loginState = $("#loginBlock").find(".active")[0];
     }
 
 
 
     function resetState(){
-	  	$("#nav span").addClass("active");
+		  	$("#nav span").addClass("active");
 
-      $("#loginBlock").addClass("hide");
-      $("#overlay").addClass("hide");
+	      $("#loginBlock").addClass("hide");
+	      $("#overlay").addClass("hide");
 
-      $("#toolbar").addClass("hide");
+	      $("#toolbar").addClass("hide");
 
-      $("#draftLayer").remove();
-
+	      $("#draftLayer").remove();
     }
