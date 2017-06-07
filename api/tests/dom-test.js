@@ -1,7 +1,7 @@
 
 
 	var wallAdditions,
-			loginState;
+	       loginState;
 	          
 
 
@@ -137,7 +137,7 @@
 
 		    describe("Login Modal form submit", function() {
 		      beforeEach(function() {
-		        	setUpHTMLFixture();
+		          setUpHTMLFixture();
 
 		          $("#loginBlock #loginForm").trigger("submit");
 		      });
@@ -151,27 +151,26 @@
 
 		    describe("Reset to original guest (non-edit) state", function() {
 		      beforeEach(function() {
-			        setUpHTMLFixture();
+				setUpHTMLFixture();
 
-			        $("#nav span").removeClass("active");
-			        // Remove the class of hide from the loginBlock and the overlay div, the
-			        // resetState function should add them right back
-			        $("#loginBlock").removeClass("hide");
-			      	$("#overlay").removeClass("hide");
+				$("#nav span").removeClass("active");
+				// Remove the class of hide from the loginBlock and the overlay div, the
+				// resetState function should add them right back
+				$("#loginBlock").removeClass("hide");
+				$("#overlay").removeClass("hide");
 
-			        resetState()
+				resetState()
 		      });
 		      
 		      it ("The resetState function should remove the draftLayer div and hide the login modal if being displayed", function() {
-				  expect(($("#nav span")[0]).className).toBe("active");
-				  expect(($("#loginBlock")[0]).className).toBe("hide");
+			  expect(($("#nav span")[0]).className).toBe("active");
+			  expect(($("#loginBlock")[0]).className).toBe("hide");
 		          expect(($("#overlay")[0]).className).toBe("hide");
 		          expect(($("#toolbar")[0]).className).toBe("hide");
 
 		          expect(($("#draftLayer")[0])).toBeUndefined();
-				  });
+		      });
 		    });
-
 
 
   });
@@ -203,8 +202,8 @@
 
 
     function enterLoginModal(){
-		    $("#loginBlock").removeClass("hide");
-		    $("#overlay").removeClass("hide");
+	      $("#loginBlock").removeClass("hide");
+	      $("#overlay").removeClass("hide");
     }
 
 
@@ -221,34 +220,34 @@
 
     function startDraftFromScratch() {
     	if($("#draftLayer")[0].firstChild){
-	    		$("#draftLayer").remove();
-	  			// It doesn't matter where we append the editable element (#draftLayer) because we 
-	  			// just check if an element having the id draftLayer exists in the corresponding tests 
-	  			// when they run, and it won't be displayed. The element with id draftLayer should exist 
-	  			// when the tests run because even though we remove the element we add it right back after.
-	  			// We cannot add the #draftLayer to a body element because no body element exists in
-	  			// the mock html dom we created for our tests to mimic the actual applications dom
-	  			$("#overlay").append("<div id='draftLayer'></div>");
+		$("#draftLayer").remove();
+		// It doesn't matter where we append the editable element (#draftLayer) because we 
+		// just check if an element having the id draftLayer exists in the corresponding tests 
+		// when they run, and it won't be displayed. The element with id draftLayer should exist 
+		// when the tests run because even though we remove the element we add it right back after.
+		// We cannot add the #draftLayer to a body element because no body element exists in
+		// the mock html dom we created for our tests to mimic the actual applications dom
+		$("#overlay").append("<div id='draftLayer'></div>");
     	}
     }
 
 
 
     function postLoginForm(e) {
-	    	e.preventDefault();
+	   e.preventDefault();
 
-	    	loginState = $("#loginBlock").find(".active")[0];
+	   loginState = $("#loginBlock").find(".active")[0];
     }
 
 
 
     function resetState(){
-		  	$("#nav span").addClass("active");
+           $("#nav span").addClass("active");
 
-	      $("#loginBlock").addClass("hide");
-	      $("#overlay").addClass("hide");
+           $("#loginBlock").addClass("hide");
+           $("#overlay").addClass("hide");
 
-	      $("#toolbar").addClass("hide");
+           $("#toolbar").addClass("hide");
 
-	      $("#draftLayer").remove();
+           $("#draftLayer").remove();
     }
