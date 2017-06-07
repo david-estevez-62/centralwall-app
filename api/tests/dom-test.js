@@ -32,10 +32,10 @@
 
 
 
-  describe("DOM manipulation and frontend tests", function() { 
+  describe("DOM manipulation and Event handler tests", function() { 
 
 
-		    describe("Toolbar input type btn click event", function() {
+		    describe("DraftLayer Post btn click event", function() {
 		      beforeEach(function() {
 			        setUpHTMLFixture();
 
@@ -93,7 +93,7 @@
 		    });
 
 
-		    describe("Exit Login form modal view", function() {
+		    describe("Overlay div click event", function() {
 		      beforeEach(function() {
 			        setUpHTMLFixture();
 			        // Remove the class of hide from the loginBlock and the overlay div, to
@@ -107,7 +107,7 @@
 		      it ("Overlay div click event should add the hide class back to the loginBlock and itself", function() {
 			        // Check to see if the hide class exists on the loginBlock and overlay as we
 			        // expect, this function in the application is responsible for effectively 
-			        // removing the login modal view
+			        // removing the login modal from view
 			        expect(($("#loginBlock")[0]).className).toBe("hide");
 			        expect(($("#overlay")[0]).className).toBe("hide");
 		      });
@@ -115,7 +115,7 @@
 
 
 
-		    describe("Toolbar refresh btn click event", function() {
+		    describe("DraftLayer refresh btn click event", function() {
 		      beforeEach(function() {
 		        	setUpHTMLFixture();
 
@@ -123,9 +123,9 @@
 			        $("#toolbar #refreshBtn").trigger("click");
 		      });
 		      
-		      it ("Toolbar refresh btn click event", function() {
-		      		// The draftLayer should exist, even though we removed it in the event handler
-		      		// we added it right back
+		      it ("The draftLayer should exist because even though we removed it we added it right back however it should not have any child elements", function() {
+	      		// The draftLayer should exist, even though we removed it in the event handler
+	      		// we added it right back
 	          	expect(($("#draftLayer")[0])).toBeTruthy();
 	          	// The child element added in the precondition should not exist because we removed
 	          	// the original draftLayer it was attached to and created a different draftLayer 
@@ -142,7 +142,7 @@
 		          $("#loginBlock #loginForm").trigger("submit");
 		      });
 		      
-		      it ("loginState is the element having the current active class it should be the same element as the first span in #loginBlock that by default starts with the active class", function() { 
+		      it ("loginState variable will be the value of the element having the current active class it should be the same element as the first span in #loginBlock that by default starts with the active class", function() { 
 		          expect(loginState).toBe($("#loginBlock span")[0]);
 		      });
 		    });
@@ -162,9 +162,9 @@
 			        resetState()
 		      });
 		      
-		      it ("The resetState should remove the draftLayer div and hide the login modal if being displayed", function() {
-							expect(($("#nav span")[0]).className).toBe("active");
-							expect(($("#loginBlock")[0]).className).toBe("hide");
+		      it ("The resetState function should remove the draftLayer div and hide the login modal if being displayed", function() {
+				  expect(($("#nav span")[0]).className).toBe("active");
+				  expect(($("#loginBlock")[0]).className).toBe("hide");
 		          expect(($("#overlay")[0]).className).toBe("hide");
 		          expect(($("#toolbar")[0]).className).toBe("hide");
 
@@ -223,9 +223,11 @@
     	if($("#draftLayer")[0].firstChild){
 	    		$("#draftLayer").remove();
 	  			// It doesn't matter where we append the editable element (#draftLayer) because we 
-	  			// just check if an element having the id draftLayer exists in the tests we run, and 
-	  			// it won't be displayed. The id draftLayer should exist when we got to do our test
-	  			// because even though we remove the element we add it right back after
+	  			// just check if an element having the id draftLayer exists in the corresponding tests 
+	  			// when they run, and it won't be displayed. The element with id draftLayer should exist 
+	  			// when the tests run because even though we remove the element we add it right back after.
+	  			// We cannot add the #draftLayer to a body element because no body element exists in
+	  			// the mock html dom we created for our tests to mimic the actual applications dom
 	  			$("#overlay").append("<div id='draftLayer'></div>");
     	}
     }
