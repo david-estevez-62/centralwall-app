@@ -32,7 +32,7 @@
 
 
 
-  describe("DOM manipulation and Event handler tests", function() { 
+  describe("DOM manipulation and Event listener tests", function() { 
 
 
 		    describe("DraftLayer Post btn click event", function() {
